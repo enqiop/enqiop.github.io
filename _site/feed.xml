@@ -1,0 +1,257 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>enqio</title>
+  <subtitle>A minimal, responsive, and powerful Jekyll theme for presenting professional writing.</subtitle>
+  <updated>2022-02-19T13:37:11+08:00</updated>
+  <author>
+    <name>enqio</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="zh-CN"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator>
+  <rights> © 2022 enqio </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>cocoaPods私有库的创建</title>
+    <link href="http://localhost:4000/posts/%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA/" rel="alternate" type="text/html" title="cocoaPods私有库的创建" />
+    <published>2021-01-16T11:33:00+08:00</published>
+  
+    <updated>2021-01-16T11:33:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA/</id>
+    <content src="http://localhost:4000/posts/%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA/" />
+    <author>
+      <name>{"name"=>"enqio", "link"=>"https://github.com/enqiop"}</name>
+    </author>
+
+  
+    
+    <category term="Demo" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      cocoaPods私有库的创建
+第一步:建立私有的spec仓库
+
+$ pod repo add REPO_NAME SOURCE_URL
+
+REPO_NAME: specs的名称
+SOURCE_URL: git地址
+
+
+
+  这里会在 ~/.cocoapods/repos目录下创建你的私有索引库,master是官方的
+
+
+官方文档
+
+第二步:在一个文件夹里创建pod项目
+首先进入到需要创建项目的文件夹下面
+
+创建项目:
+
+$ pod lib create [项目名]
+
+接下来按照提示设置一些东西过后就可以创建好pod项目
+
+2.1 在Classes目录下添加你的代码
+
+第三步: 提交项目到git仓库(这里不是spec的地址,是新的git地址,相当于新的项目)
+
+$ git add .
+
+$ git commit -s -m "初始化项目库"
+
+$ git remote add ori...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Enable Google Page Views</title>
+    <link href="http://localhost:4000/posts/enable-google-pv/" rel="alternate" type="text/html" title="Enable Google Page Views" />
+    <published>2021-01-04T07:32:00+08:00</published>
+  
+    <updated>2021-01-04T07:32:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/enable-google-pv/</id>
+    <content src="http://localhost:4000/posts/enable-google-pv/" />
+    <author>
+      <name>{"name"=>"Dinesh Prasanth Moluguwan Krishnamoorthy", "link"=>"https://github.com/SilleBille"}</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      This post is to enable Page Views on the Chirpy theme based blog that you just built. This requires technical knowledge and it’s recommended to keep the google_analytics.pv.* empty unless you have a good reason. If your website has low traffic, the page views count would discourage you to write more blogs. With that said, let’s start with the setup.
+
+Set up Google Analytics
+
+Create GA account a...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Customize the Favicon</title>
+    <link href="http://localhost:4000/posts/customize-the-favicon/" rel="alternate" type="text/html" title="Customize the Favicon" />
+    <published>2019-08-11T00:34:00+08:00</published>
+  
+    <updated>2019-08-11T00:34:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/customize-the-favicon/</id>
+    <content src="http://localhost:4000/posts/customize-the-favicon/" />
+    <author>
+      <name>{"name"=>"Cotes Chung", "link"=>"https://github.com/cotes2020"}</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      The favicons of Chirpy are placed in the directory assets/img/favicons/. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
+
+Generate the favicon
+
+Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and then go to the online tool Real Favicon Generator and click the button Select your Favicon image ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Getting Started</title>
+    <link href="http://localhost:4000/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
+    <published>2019-08-09T20:55:00+08:00</published>
+  
+    <updated>2019-08-09T20:55:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/getting-started/</id>
+    <content src="http://localhost:4000/posts/getting-started/" />
+    <author>
+      <name>{"name"=>"Cotes Chung", "link"=>"https://github.com/cotes2020"}</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Prerequisites
+
+Follow the instructions in the Jekyll Docs to complete the installation of Ruby, RubyGems, Jekyll, and Bundler. In addition, Git is also required to be installed.
+
+Installation
+
+Creating a New Site
+
+There are two ways to create a new repository for this theme:
+
+
+  Using the Chirpy Starter - Easy to upgrade, isolates irrelevant project files so you can focus on writing.
+  Forking ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Writing a New Post</title>
+    <link href="http://localhost:4000/posts/write-a-new-post/" rel="alternate" type="text/html" title="Writing a New Post" />
+    <published>2019-08-08T14:10:00+08:00</published>
+  
+    <updated>2019-08-08T14:10:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/write-a-new-post/</id>
+    <content src="http://localhost:4000/posts/write-a-new-post/" />
+    <author>
+      <name>{"name"=>"Cotes Chung", "link"=>"https://github.com/cotes2020"}</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      This post will guide you how to write a post on Chirpy theme. Even if you have previous experience with Jekyll, this article is worth reading, because many features require specific variables to be set.
+
+Naming and Path
+
+Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+

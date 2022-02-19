@@ -1,0 +1,198 @@
+I"�#<h1 id="cocoapods私有库的创建">cocoaPods私有库的创建</h1>
+<h4 id="第一步建立私有的spec仓库">第一步:建立私有的spec仓库</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>pod repo add REPO_NAME SOURCE_URL
+
+REPO_NAME: specs的名称
+SOURCE_URL: git地址
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote class="prompt-info">
+  <p>这里会在 ~/.cocoapods/repos目录下创建你的私有索引库,master是官方的</p>
+</blockquote>
+
+<p><a href="https://guides.cocoapods.org/making/private-cocoapods.html">官方文档</a></p>
+
+<h3 id="第二步在一个文件夹里创建pod项目">第二步:在一个文件夹里创建pod项目</h3>
+<p>首先进入到需要创建项目的文件夹下面</p>
+
+<p>创建项目:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>pod lib create <span class="o">[</span>项目名]
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>接下来按照提示设置一些东西过后就可以创建好pod项目</p>
+
+<p>2.1 在Classes目录下添加你的代码</p>
+
+<h3 id="第三步-提交项目到git仓库这里不是spec的地址是新的git地址相当于新的项目">第三步: 提交项目到git仓库(这里不是spec的地址,是新的git地址,相当于新的项目)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>git add <span class="nb">.</span>
+
+<span class="nv">$ </span>git commit <span class="nt">-s</span> <span class="nt">-m</span> <span class="s2">"初始化项目库"</span>
+
+<span class="nv">$ </span>git remote add origin <span class="o">[</span>项目git地址]          
+<span class="c">#添加远端仓库 项目git地址,不是前面的spec库</span>
+
+<span class="nv">$ </span>git push origin master
+
+<span class="nv">$ </span>git tag <span class="nt">-m</span> <span class="s2">"提交项目"</span> <span class="s2">"0.1.0"</span> 
+<span class="c">#打上标签，这个很重要,关系着你的版本控制,podfile文件中的版本号依赖于此,每次提交不同的版本要打上不同的tag</span>
+
+<span class="nv">$ </span>git push <span class="nt">--tags</span>     
+<span class="c">#推送tag到远端仓库</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="第四步创建并提交podspec文件到私有spec-repo仓库">第四步:创建并提交podspec文件到私有Spec Repo仓库</h3>
+
+<p>这一步的作用就是让自己的私有库索引能够找到对应的pod库</p>
+
+<ul>
+  <li>配置podspec文件</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre></td> --><td class="rouge-code"><pre><span class="gp">#</span><span class="w">
+</span><span class="gp">#</span><span class="w"> </span>Any lines starting with a <span class="c"># are optional, but their use is encouraged</span>
+<span class="gp">#</span><span class="w"> </span>To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+<span class="gp">#</span><span class="w">
+</span><span class="go">
+Pod::Spec.new do |s|
+  s.name             = 'THCacheMoudle'
+  s.version          = '0.1.1'
+  s.summary          = 'A short description of THCacheMoudle.'
+
+</span><span class="gp">#</span><span class="w"> </span>This description is used to generate tags and improve search results.
+<span class="gp">#</span><span class="w">   </span><span class="k">*</span> Think: What does it <span class="k">do</span>? Why did you write it? What is the focus?
+<span class="gp">#</span><span class="w">   </span><span class="k">*</span> Try to keep it short, snappy and to the point.
+<span class="gp">#</span><span class="w">   </span><span class="k">*</span> Write the description between the DESC delimiters below.
+<span class="gp">#</span><span class="w">   </span><span class="k">*</span> Finally, don<span class="s1">'t worry about the indent, CocoaPods strips it!
+</span><span class="go">
+  s.description      = &lt;&lt;-DESC
+TODO: Add long description of the pod here.
+                       DESC
+
+</span><span class="gp">  s.homepage         = 'http://www.tuhuanjk.com' #</span>这个地址一定要可以访问,不然不能验证通过
+<span class="gp">  #</span><span class="w"> </span>s.screenshots     <span class="o">=</span> <span class="s1">'www.example.com/screenshots_1'</span>, <span class="s1">'www.example.com/screenshots_2'</span>
+<span class="gp">  s.license          = { :type =&gt;</span><span class="w"> </span><span class="s1">'MIT'</span>, :file <span class="o">=&gt;</span> <span class="s1">'LICENSE'</span> <span class="o">}</span>
+<span class="gp">  s.author           = { 'heshuai' =&gt;</span><span class="w"> </span><span class="s1">'heshuai@sctuhuan.com'</span> <span class="o">}</span>
+<span class="gp">  s.source           = { :git =&gt;</span><span class="w"> </span><span class="s1">'http://192.168.8.254:4521/THCacheMoudle.git'</span>, :tag <span class="o">=&gt;</span> s.version.to_s <span class="o">}</span>
+<span class="gp">  #</span><span class="w"> </span>s.social_media_url <span class="o">=</span> <span class="s1">'https://twitter.com/&lt;TWITTER_USERNAME&gt;'</span>
+<span class="go">
+  s.ios.deployment_target = '8.0'
+
+  s.source_files = 'THCacheMoudle/Classes/**/*'
+  
+</span><span class="gp">  #</span><span class="w"> </span>s.resource_bundles <span class="o">=</span> <span class="o">{</span>
+<span class="gp">  #</span><span class="w">   </span><span class="s1">'THCacheMoudle'</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">'THCacheMoudle/Assets/*.png'</span><span class="o">]</span>
+<span class="gp">  #</span><span class="w"> </span><span class="o">}</span>
+<span class="go">
+</span><span class="gp">  #</span><span class="w"> </span>s.public_header_files <span class="o">=</span> <span class="s1">'Pod/Classes/**/*.h'</span>
+<span class="gp">  #</span><span class="w"> </span>s.frameworks <span class="o">=</span> <span class="s1">'UIKit'</span>, <span class="s1">'MapKit'</span>
+<span class="gp">  #</span><span class="w"> </span>s.dependency <span class="s1">'AFNetworking'</span>, <span class="s1">'~&gt; 2.3'</span>
+<span class="go">    s.dependency 'HandyJSON'
+    s.dependency 'PINCache'
+    s.dependency 'RNCryptor'
+end
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<ul>
+  <li>验证一下这个podspec文件是否可用</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>pod lib lint
+<span class="c"># 有一个警告都会验证失败</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>向Spec提交podspec文件, Spec就是存的各个pod的podspec索引</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td> --><td class="rouge-code"><pre><span class="c">#进入pod项目的根目录执行</span>
+<span class="nv">$ </span>pod repo push <span class="o">[</span>Repo名] <span class="o">[</span>podspec 文件名字]
+
+<span class="c">#~/.cocoapods/repos/**下面查看你提交的podspec文件</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="第五步-使用pod">第五步: 使用pod</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td> --><td class="rouge-code"><pre><span class="c">#私有Spec,在podfile中填写私有podspec地址,然后 就是普通的pod用法了</span>
+<span class="nb">source</span> <span class="o">[</span>Spec的git地址] 
+<span class="nv">$ </span>pod <span class="o">[</span>项目名], <span class="s1">'~&gt; [tag版本号]'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="错误处理">错误处理</h3>
+
+<hr />
+
+<h6 id="pod-lib-lint不通过">pod lib lint不通过</h6>
+
+<p>这个如果是找不到库的头文件,可以使用<code class="language-plaintext highlighter-rouge">--use-libraries</code>来验证,再上传的时候同样带上此参数</p>
+:ET
